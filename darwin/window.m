@@ -375,7 +375,12 @@ uiWindow *uiNewWindow(const char *title, int width, int height, int hasMenubar)
 
 	uiDarwinNewControl(uiWindow, w);
 
-	w->window = [[uiprivNSWindow alloc] initWithContentRect:NSMakeRect(0, 0, (CGFloat) width, (CGFloat) height)
+	NSRect screenFrame = [[NSScreen mainScreen] frame];
+	NSPoint initialPosition = NSMakePoint((screenFrame.size.width - (CGFloat)width) / 2.0,
+	                                    (screenFrame.size.height - (CGFloat)height) / 2.0);
+	// NSLog(@"Window initial position: x=%f, y=%f", initialPosition.x, initialPosition.y);
+  
+	w->window = [[uiprivNSWindow alloc] initWithContentRect:NSMakeRect(initialPosition.x, initialPosition.y, (CGFloat) width, (CGFloat) height)
 		styleMask:defaultStyleMask
 		backing:NSBackingStoreBuffered
 		defer:YES];
