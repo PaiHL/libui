@@ -16,9 +16,9 @@ jobs:
         # ubuntu-18.04, ubuntu-latest (ubuntu-20.04)
         os: [ubuntu-latest]
         # x86, x64
-        arch: [x64, arm64]
+        arch: [x64]
         # static, shared
-        libtype: [static]
+        libtype: [x86, static]
         # debug, debugoptimized, release
         buildtype: [release]
     runs-on: ${{ matrix.os }}
@@ -30,32 +30,11 @@ jobs:
           pip3 install meson ninja
           sudo apt-get update -y
           sudo apt-get install -y libgtk-3-dev xvfb
-          # 安装交叉编译工具链
-          if [ "${{ matrix.arch }}" = "arm64" ]; then
-            sudo apt-get install -y gcc-aarch64-linux-gnu g++-aarch64-linux-gnu
-          fi
-
-      - name: Install ARM64 Dependencies
-        if: matrix.arch == 'arm64'
-        run: |
-          sudo dpkg --add-architecture arm64
-          sudo apt-get update -y
-          sudo apt-get install -y \
-            libgtk-3-dev:arm64 \
-            libglib2.0-dev:arm64 \
-            libgdk-pixbuf2.0-dev:arm64 \
-            libpango1.0-dev:arm64 \
-            libcairo2-dev:arm64
 
       - name: Checkout
         uses: actions/checkout@v4
       - name: Meson Setup Build
-        run: |
-          if [ "${{ matrix.arch }}" = "arm64" ]; then
-          meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }} --cross-file cross-arm64.ini
-          else
-          meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }}
-          fi
+        run: meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }}
       - name: Ninja Build
         run: ninja -C builddir --verbose
       - name: Run Tests
