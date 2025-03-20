@@ -16,10 +16,11 @@ jobs:
         # ubuntu-18.04, ubuntu-latest (ubuntu-20.04)
         os: [ubuntu-18.04]
         # x86, x64
-        arch: [x64]
-        libtype: [static, shared]
+        arch: [x64, arm64]
+        # static, shared
+        libtype: [static]
         # debug, debugoptimized, release
-        buildtype: [debug]
+        buildtype: [release]
     runs-on: ${{ matrix.os }}
     name: Ubuntu-${{ matrix.arch }}-${{ matrix.libtype }}
     steps:
@@ -147,11 +148,13 @@ jobs:
       fail-fast: false
       matrix:
         os: [macos-latest]
-        libtype: [static, shared]
+        arch: [x64, arm64]  # 同时支持 Intel 和 Apple Silicon
+        # static, shared
+        libtype: [static]
         # debug, debugoptimized, release
-        buildtype: [debug]
+        buildtype: [release]
     runs-on: ${{ matrix.os }}
-    name: macOS-x64-${{ matrix.libtype }}
+    name: macOS-${{ matrix.arch }}-${{ matrix.libtype }}
     steps:
       - name: Unbreak Python in Github Actions
         run: |
