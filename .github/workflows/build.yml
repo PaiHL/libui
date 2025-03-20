@@ -75,9 +75,10 @@ jobs:
           # Set an output parameter `uname` for use in subsequent steps
           run: |
             cd /build
+            sudo apt-get update -y
+            sudo apt-get install -y python3 python3-pip
             python3 -m pip install --upgrade pip setuptools wheel
             pip3 install meson ninja
-            sudo apt-get update -y
             sudo apt-get install -y libgtk-3-dev xvfb
             meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }}
             ninja -C builddir --verbose
