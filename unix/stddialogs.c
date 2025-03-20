@@ -40,7 +40,7 @@ char *uiOpenFile(uiWindow *parent)
 
 char *uiOpenFolder(uiWindow *parent)
 {
-    return filedialog(windowWindow(parent), FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Open");
+    return filedialog(windowWindow(parent), GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER, "_Open");
 }
 
 char *uiSaveFile(uiWindow *parent)
