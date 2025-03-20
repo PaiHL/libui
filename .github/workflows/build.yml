@@ -38,9 +38,9 @@ jobs:
       - name: Meson Setup Build
         run: |
           if [ "${{ matrix.arch }}" = "arm64" ]; then
-            CC=aarch64-linux-gnu-gcc CXX=aarch64-linux-gnu-g++ meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }}
+          meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }} --cross-file cross-arm64.ini
           else
-            meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }}
+          meson setup builddir --buildtype=${{ matrix.buildtype }} --default-library=${{ matrix.libtype }}
           fi
       - name: Ninja Build
         run: ninja -C builddir --verbose
