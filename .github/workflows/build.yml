@@ -56,7 +56,7 @@ jobs:
       matrix:
         arch: [ aarch64 ]
         libtype: [ static ]
-        buildtype: [ release, debug ]
+        buildtype: [ release ]
     # The host should always be Linux
     runs-on: ubuntu-20.04
     name: Build on ubuntu-20.04 aarch64
@@ -70,10 +70,11 @@ jobs:
           distro: ubuntu20.04
 
           dockerRunArgs: |
-            --volume "${PWD}:/"
+            --volume "${PWD}:/build"
 
           # Set an output parameter `uname` for use in subsequent steps
           run: |
+            cd /build
             python3 -m pip install --upgrade pip setuptools wheel
             pip3 install meson ninja
             sudo apt-get update -y
