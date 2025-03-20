@@ -176,7 +176,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: macOS-x64-${{ matrix.libtype }}-${{ matrix.buildtype }}
+          name: macOS-${{ matrix.arch }}-${{ matrix.libtype }}-${{ matrix.buildtype }}
           # lib + header + examples + test + build-log
           path: |
             !builddir/meson-out/*.p/
