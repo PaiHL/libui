@@ -248,6 +248,7 @@ uiWindow *uiNewWindow(const char *title, int width, int height, int hasMenubar)
 
 	gtk_window_set_title(w->window, title);
 	gtk_window_resize(w->window, width, height);
+    gtk_window_set_position(w->window, GTK_WIN_POS_CENTER);
 
 	w->vboxWidget = gtk_box_new(GTK_ORIENTATION_VERTICAL, 0);
 	w->vboxContainer = GTK_CONTAINER(w->vboxWidget);
