@@ -125,6 +125,13 @@ void uiWindowSetTitle(uiWindow *w, const char *title)
 	gtk_window_set_title(w->window, title);
 }
 
+void uiWindowForeground(uiWindow *w)
+{
+    gtk_window_set_keep_above(w->window, TRUE);
+    gtk_window_set_type_hint(w->window, GDK_WINDOW_TYPE_HINT_DOCK);
+    gtk_window_present(w->window);
+}
+
 void uiWindowContentSize(uiWindow *w, int *width, int *height)
 {
 	GtkAllocation allocation;

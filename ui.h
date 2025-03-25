@@ -119,6 +119,7 @@ typedef struct uiWindow uiWindow;
 #define uiWindow(this) ((uiWindow *) (this))
 _UI_EXTERN char *uiWindowTitle(uiWindow *w);
 _UI_EXTERN void uiWindowSetTitle(uiWindow *w, const char *title);
+_UI_EXTERN void uiWindowForeground(uiWindow *w);
 _UI_EXTERN void uiWindowContentSize(uiWindow *w, int *width, int *height);
 _UI_EXTERN void uiWindowSetContentSize(uiWindow *w, int width, int height);
 _UI_EXTERN int uiWindowFullscreen(uiWindow *w);

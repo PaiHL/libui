@@ -255,6 +255,11 @@ void uiWindowSetTitle(uiWindow *w, const char *title)
 	[w->window setTitle:uiprivToNSString(title)];
 }
 
+void uiWindowForeground(uiWindow *w) {
+    [w->window setLevel:NSFloatingWindowLevel];  // 使窗口浮动在最上层
+    [w->window setCollectionBehavior:NSWindowCollectionBehaviorCanJoinAllSpaces];  // 使其在所有桌面空间可见
+}
+
 void uiWindowContentSize(uiWindow *w, int *width, int *height)
 {
 	NSRect r;

@@ -292,6 +292,11 @@ void uiWindowSetTitle(uiWindow *w, const char *title)
 	// don't queue resize; the caption isn't part of what affects layout and sizing of the client area (it'll be ellipsized if too long)
 }
 
+void uiWindowForeground(uiWindow *w)
+{
+    SetWindowPos(w->hwnd, HWND_TOPMOST, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE);
+}
+
 // this is used for both fullscreening and centering
 // see also https://blogs.msdn.microsoft.com/oldnewthing/20100412-00/?p=14353 and https://blogs.msdn.microsoft.com/oldnewthing/20050505-04/?p=35703
 static void windowMonitorRect(HWND hwnd, RECT *r)
